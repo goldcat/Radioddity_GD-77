@@ -204,6 +204,88 @@ Second text message stored at 0x200
 
 Maximum number of Text messages TBD
 
+#Privacy (screen)
+
+TBD
+
+#Signaling System
+
+DTMF and Emergency System  - TBD
+
+#Contact (section)
+
+DTMF - TBD
+
+#Digital Contact (Screen)
+
+Default data has 3 contacts, as examples of the 3 types of contact
+
+00017620: 43 6F 6E 74 61 63 74 31 - FF FF FF FF FF FF FF FF |Contact1        |
+00017630: 00 00 00 01 00 01 00 FF - 43 6F 6E 74 61 63 74 32 |        Contact2|
+00017640: FF FF FF FF FF FF FF FF - 00 00 00 01 01 01 00 FF |                |
+00017650: 43 6F 6E 74 61 63 74 33 - FF FF FF FF FF FF FF FF |Contact3        |
+
+Renaming Contact1,Contact2 and Contact3 
+Changed Contact1, Call ID from 00000001 to 11111111 and
+Changed Contact2, Call ID from 00000001 to 12222222 
+
+Yielded
+ 
+00017620: 43 6F 6E 74 61 63 74 31 - 41 FF FF FF FF FF FF FF |Contact1A       |
+00017630: 11 11 11 11 00 01 00 FF - 43 6F 6E 74 61 63 74 32 |        Contact2|
+00017640: 41 FF FF FF FF FF FF FF - 12 22 22 22 01 01 00 FF |A        """    |
+00017650: 43 6F 6E 74 61 63 74 33 - 41 FF FF FF FF FF FF FF |Contact3A       |
+
+Contact record appears to be 24 bytes long.
+First 16 bytes are the name, with unused characters filled with 0xff
+Call ID is decimal coded in hex (nibbles) from offset 0x10 to 0x13
+
+Offset 0x14 is Contact Type. 
+0x00 = "Group All"  (this is supposed to read Group Call)
+0x01 = Private call
+
+Offset 0x15 is Call Receive tone enable 0x00 is disable 0x01 is enable
+(all the contacts in this example have this enabled)
+
+Offset 0x16 is the "Ring Style" 0x00 = None, 0x01 = 1 etc
+
+Adding a additional contact, changes the data next to the existing data e.g
+
+
+00017650: 43 6F 6E 74 61 63 74 33 - 41 FF FF FF FF FF FF FF |Contact3A       |
+00017660: 16 77 72 15 02 01 00 FF - FF FF FF FF FF FF FF FF | wr             |
+00017670: FF FF FF FF FF FF FF FF - FF FF FF FF FF FF FF FF |               |
+
+becomes
+
+00017650: 43 6F 6E 74 61 63 74 33 - 41 FF FF FF FF FF FF FF |Contact3A       |
+00017660: 16 77 72 15 02 01 00 FF - 54 47 35 30 35 FF FF FF | wr     TG505   |
+00017670: FF FF FF FF FF FF FF FF - 00 00 05 05 00 01 00 FF |                |
+
+When TG5-5 with ID 00000505 is added
+
+Editing the dat file to add another record also worked 
+
+
+00017680: 43 6F 6E 74 61 63 74 39 - 39 FF FF FF FF FF FF FF |Contact99       |
+00017690: 11 11 11 99 00 01 00 FF - FF FF FF FF FF FF FF FF |                |
+
+I also changed the first byte of Contact99 to 0xFF and it was no longer visible in the CPS, which suggests the CPS just looks for 0xff in the first byte of the contacts list.
+
+I added multiple contacts manually, with no apparent problems to the CPS in terms of is Contacts display
+
+However due to the relationship betwen contacts and Channels and RX Group lists, this may be different if they exist
+
+
+
+
+
+
+
+
+
+
+
 #REST OF FILE TDB
 
 
