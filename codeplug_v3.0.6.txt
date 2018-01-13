@@ -353,8 +353,18 @@ To this
 000037f0: 16 01 01 01 01 01 00 00 - 00 00 00 81 00 00 00 00 |                |
 
 Channel names can be 1 to 15 characters, terminated with 0xff in the first 16 bytes of the Channel recod
-Offset 0x10   bytes 00 25 40 14 is Rx frequency (144.02500)
-Offset 0x14   bytes 00 25 40 14 is Tx frequency (144.02500)
+Offset 0x10 - 0x13  bytes 00 25 40 14 is Rx frequency (144.02500)
+Offset 0x14 - 0x17  bytes 00 25 40 14 is Tx frequency (144.02500)
+Offset 0x18 Mode. 0x00 = Digital 0x01 = Analogue
+Offset 0x1B TOT timer 0x00 = infinite 0x01 = 15 secs, 0x02 = 30 secs, max value = 0x21 = 495 secs
+Offset 0x1C TOT rekey time 0xFF = 255 seconds (Note, if TOT is infinite this is grayed out in the UI)
+Offset 0x1D Admit criteria 0x00 = Always 0x01 = Channel free, 0x02 Colour code (digital mode only)
+Offset 0x1F Scan list number 0x00 = None 0x01 = First scan list etc
+Offset 0x33 Bit fields 
+Bit 0  Squelch  Normal 1 = Tight
+Bit 1 Autoscan (1 = enabled)
+Bit 3 Power level 0 = Low 1 = High
+
 
 Other settings TBD
 
