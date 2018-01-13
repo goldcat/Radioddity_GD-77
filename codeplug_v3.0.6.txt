@@ -328,9 +328,35 @@ Data from offset 0x10 to 0x2D hold the list of Contacts in the group, with forma
 01 00 = Contact 0x0001
 
 
+#Channels (screen)
 
+Renaming the Channel1 in the default data to Channel1A
 
+changed this
 
+00003790: 43 68 61 6E 6E 65 6C 31 - FF FF FF FF FF FF FF FF |Channel1        |
+000037a0: 00 25 40 14 00 25 40 14 - 01 00 00 00 FF 00 50 01 | %@  %@       P |
+000037b0: FF FF FF FF 00 00 00 00 - 16 01 00 01 00 01 01 00 |                |
+000037c0: 00 00 00 81 00 00 00 00 - 43 68 61 6E 6E 65 6C 32 |        Channel2|
+000037d0: FF FF FF FF FF FF FF FF - 00 25 41 14 00 25 41 14 |         %A  %A |
+000037e0: 01 00 00 00 FF 00 50 00 - FF FF FF FF 00 00 00 00 |      P         |
+000037f0: 16 01 01 01 01 01 00 00 - 00 00 00 81 00 00 00 00 |                |
+
+To this
+
+00003790: 43 68 61 6E 6E 65 6C 31 - 41 FF FF FF FF FF FF FF |Channel1A       |
+000037a0: 00 25 40 14 00 25 40 14 - 01 00 00 00 FF 00 50 01 | %@  %@       P |
+000037b0: FF FF FF FF 00 00 00 00 - 16 01 00 01 00 01 01 00 |                |
+000037c0: 00 00 00 81 00 00 00 00 - 43 68 61 6E 6E 65 6C 32 |        Channel2|
+000037d0: FF FF FF FF FF FF FF FF - 00 25 41 14 00 25 41 14 |         %A  %A |
+000037e0: 01 00 00 00 FF 00 50 00 - FF FF FF FF 00 00 00 00 |      P         |
+000037f0: 16 01 01 01 01 01 00 00 - 00 00 00 81 00 00 00 00 |                |
+
+Channel names can be 1 to 15 characters, terminated with 0xff in the first 16 bytes of the Channel recod
+Offset 0x10   bytes 00 25 40 14 is Rx frequency (144.02500)
+Offset 0x14   bytes 00 25 40 14 is Tx frequency (144.02500)
+
+Other settings TBD
 
 
 
