@@ -279,6 +279,57 @@ However due to the relationship betwen contacts and Channels and RX Group lists,
 
 
 
+#Rx Group list (screen)
+
+Renaming the group which is already in the default file and adding in the first 16 contacts from the Digital Contacts, and adding a second (empty) Rx Group, changed this 
+
+0001d620: 01 00 00 00 00 00 00 00 - 00 00 00 00 00 00 00 00 |                |
+0001d630: 00 00 00 00 00 00 00 00 - 00 00 00 00 00 00 00 00 |                |
+0001d640: 00 00 00 00 00 00 00 00 - 00 00 00 00 00 00 00 00 |                |
+0001d650: 00 00 00 00 00 00 00 00 - 00 00 00 00 00 00 00 00 |                |
+0001d660: 00 00 00 00 00 00 00 00 - 00 00 00 00 00 00 00 00 |                |
+0001d670: 00 00 00 00 00 00 00 00 - 00 00 00 00 00 00 00 00 |                |
+0001d680: 00 00 00 00 00 00 00 00 - 00 00 00 00 00 00 00 00 |                |
+0001d690: 00 00 00 00 00 00 00 00 - 00 00 00 00 00 00 00 00 |                |
+0001d6a0: 47 72 6F 75 70 4C 69 73 - 74 31 FF FF FF FF FF FF |GroupList1      |
+0001d6b0: 00 00 00 00 00 00 00 00 - 00 00 00 00 00 00 00 00 |                |
+0001d6c0: 00 00 00 00 00 00 00 00 - 00 00 00 00 00 00 00 00 |                |
+0001d6d0: FF FF FF FF FF FF FF FF - FF FF FF FF FF FF FF FF |                |
+0001d6e0: FF FF FF FF FF FF FF FF - FF FF FF FF FF FF FF FF |                |
+0001d6f0: FF FF FF FF FF FF FF FF - FF FF FF FF FF FF FF FF |  
+
+To this
+
+
+0001d620: 10 01 00 00 00 00 00 00 - 00 00 00 00 00 00 00 00 |                |
+0001d630: 00 00 00 00 00 00 00 00 - 00 00 00 00 00 00 00 00 |                |
+0001d640: 00 00 00 00 00 00 00 00 - 00 00 00 00 00 00 00 00 |                |
+0001d650: 00 00 00 00 00 00 00 00 - 00 00 00 00 00 00 00 00 |                |
+0001d660: 00 00 00 00 00 00 00 00 - 00 00 00 00 00 00 00 00 |                |
+0001d670: 00 00 00 00 00 00 00 00 - 00 00 00 00 00 00 00 00 |                |
+0001d680: 00 00 00 00 00 00 00 00 - 00 00 00 00 00 00 00 00 |                |
+0001d690: 00 00 00 00 00 00 00 00 - 00 00 00 00 00 00 00 00 |                |
+0001d6a0: 47 72 6F 75 70 4C 69 73 - 74 41 42 43 44 45 46 FF |GroupListABCDEF |
+0001d6b0: 01 00 02 00 03 00 04 00 - 05 00 06 00 07 00 08 00 |                |
+0001d6c0: 09 00 0A 00 0B 00 0C 00 - 0D 00 0E 00 0F 00 00 00 |                |
+0001d6d0: 47 72 6F 75 70 4C 69 73 - 74 32 FF FF FF FF FF FF |GroupList2      |
+0001d6e0: 00 00 00 00 00 00 00 00 - 00 00 00 00 00 00 00 00 |                |
+0001d6f0: 00 00 00 00 00 00 00 00 - 00 00 00 00 00 00 00 00 |                |
+
+
+Adddress 0x0001d620 changed from 01 to 04, when the number of Contacts changed from 0 to 3, hence the addresses from 01d620 onwards hold the Contacts count for the Rx Group list items from address 0x1d6a0 onwards
+
+Maximum groups per list is 15, which is dictated by the storage area allocated for each record
+
+e.g. each record is 48 bytes long
+
+Rx Group Name can be 1 to 15 characters, byte offset 15 always seems to contain the terminator character 0xff 
+Data from offset 0x10 to 0x2D hold the list of Contacts in the group, with formatting 
+01 00 = Contact 0x0001
+
+
+
+
 
 
 
